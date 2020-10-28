@@ -87,6 +87,23 @@ chmod +x flightinfo.sh
 touch flightinfo.txt
 ```
 
+### Add the following to your automations.yaml
+```
+- id: '1602535344179'
+  alias: Flight Info
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.openskyflights
+  condition: []
+  action:
+  - service: shell_command.flightinfo_script
+    data:
+      data_template:
+      flightnumber: '{{ states("sensor.openskyflights") }}'
+  mode: single
+```
+
 ### Restart homeassistant
 
 ### Add a Glance Gard with the following config
